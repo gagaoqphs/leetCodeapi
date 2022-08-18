@@ -4,6 +4,10 @@ const app = express();
 
 const port = process.env.PORT || 3000;
 
+app.get('/',(req,resp)=>{
+    resp.status(404).json({"status":"error","message":"please enter your username (ex: https://leetcodeapi-production.up.railway.app/dojeto)"})
+})
+
 app.get('/:username',async (req,resp)=>{
         
         try{
@@ -46,7 +50,7 @@ app.get('/:username',async (req,resp)=>{
                 "contributionPoints": data['data']['matchedUser']['contributions']['points'],
                 "reputation": data['data']['matchedUser']['profile']['reputation'],
             }
-            resp.json(obj)
+            resp.status(200).json(obj)
         }
         catch(e){
             console.log(e)
@@ -89,6 +93,3 @@ app.get('/:username',async (req,resp)=>{
 app.listen(port,()=>{
     console.log(`Working ${port}`);
 })
-
-
-
